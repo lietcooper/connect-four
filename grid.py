@@ -118,18 +118,6 @@ class Grid:
             self.gc.is_ai_turn = False
             self.gc.is_player_turn = False
 
-        # Record last move for AI
-        if disk.color == "red":
-            if self.gc.ai.red_count < count:
-                self.gc.ai.red_count = count
-                self.gc.ai.red_l_disk = (x1, y1)
-                self.gc.ai.red_r_disk = (x2, y2)
-        else:
-            if self.gc.ai.last_count < count:
-                self.gc.ai.last_count = count
-                self.gc.ai.l_disk = (x1, y1)
-                self.gc.ai.r_disk = (x2, y2)
-
     def vertical_four(self, disk, count=0):
         """Check if four in a column"""
         m = disk.x // self.grid_size
