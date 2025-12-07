@@ -125,12 +125,17 @@ class AI:
 
     def make_move(self, board, col, color):
         """Make a move on a copy of the board and return the new board"""
-        from types import SimpleNamespace
         board_copy = copy.deepcopy(board)
         # Create a simple disk object
-        disk = SimpleNamespace(color=color)
+        disk = DiskObject(color)
         board_copy[col].append(disk)
         return board_copy
+
+
+class DiskObject:
+    """A simple disk object for the AI simulation"""
+    def __init__(self, color):
+        self.color = color
 
     def evaluate_board(self, board):
         """Evaluate the current board position for the AI"""

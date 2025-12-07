@@ -1,7 +1,5 @@
-from types import SimpleNamespace
-
 from game_controller import GameController
-from ai import AI
+from ai import AI, DiskObject
 WIDTH = 700
 HEIGHT = 700
 GRID_SIZE = 100
@@ -34,7 +32,7 @@ def reset_board():
 
 
 def add_disk(column, color):
-    gc.grid.disks[column].append(SimpleNamespace(color=color))
+    gc.grid.disks[column].append(DiskObject(color))
     gc.grid.total += 1
 
 
