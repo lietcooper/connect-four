@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 from game_controller import GameController
 from ai import AI
 WIDTH = 700
@@ -15,12 +17,7 @@ def test_constructor():
         ai.grid_size == 100 and
         ai.rows == 6 and
         ai.cols == 7 and
-        ai.last_count == 0 and
-        ai.l_disk == (-1, -1) and
-        ai.r_disk == (-1, -1) and
-        ai.red_count == 0 and
-        ai.red_l_disk == (-1, -1) and
-        ai.red_r_disk == (-1, -1)
+        ai.max_depth == 6
     )
 
 
@@ -31,24 +28,28 @@ def test_coordinate_to_length():
     assert y_length == 250
 
 
-def test_win_move():
-    gc.ai.last_count = 3
-    gc.ai.l_disk = (4, 0)
-    gc.ai.r_disk = (4, 2)
-    assert gc.ai.win_move() == 4
+def reset_board():
+    gc.grid.disks = [[] for _ in range(gc.grid.disks_width)]
+    gc.grid.total = 0
 
 
-def test_break_move():
-    gc.ai.red_count = 3
-    for i in range(3):
-        gc.grid.disks[0].append(i)
-    gc.ai.red_l_disk = (0, 0)
-    gc.ai.red_r_disk = (0, 2)
-    assert gc.ai.break_move() == 0
+def add_disk(column, color):
+    gc.grid.disks[column].append(SimpleNamespace(color=color))
+    gc.grid.total += 1
 
 
-def test_regular_move():
-    rand_int = [0, 1, 2, 3, 4, 5, 6]
-    assert gc.ai.regular_move() in rand_int
-    assert gc.ai.regular_move() in rand_int
-    assert gc.ai.regular_move() in rand_int
+def test_try_move_finds_winning_play():
+    reset_board()
+    for column in range(3):
+        add_disk(column, "yellow")
+    add_disk(0, "red")
+    add_disk(1, "red")
+    assert gc.ai.try_move() == 3
+
+
+def test_try_move_blocks_player():
+    reset_board()
+    for column in range(3):
+        add_disk(column, "red")
+    add_disk(4, "yellow")
+    assert gc.ai.try_move() == 3
