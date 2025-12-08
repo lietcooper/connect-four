@@ -4,12 +4,12 @@ import copy
 
 class AI:
     """A class for computer moves using minimax with alpha-beta pruning"""
-    def __init__(self, start_line, width, height, grid_size):
+    def __init__(self, start_line, width, height, grid_size, max_depth):
         self.start_line = start_line
         self.grid_size = grid_size
         self.rows = (height - start_line) // grid_size
         self.cols = width // grid_size
-        self.max_depth = 6  # Depth limit for minimax search
+        self.max_depth = max_depth  # Depth limit for minimax search
 
     def coordinate_to_length(self, x):
         return x * self.grid_size + self.grid_size // 2

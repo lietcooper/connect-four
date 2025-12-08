@@ -4,12 +4,12 @@ WIDTH = 700
 HEIGHT = 700
 GRID_SIZE = 100
 START_LINE = GRID_SIZE  # the height of click area
-gc = GameController(START_LINE, WIDTH, HEIGHT, GRID_SIZE, "Lijun")
+gc = GameController(START_LINE, WIDTH, HEIGHT, GRID_SIZE, "Lijun", 6)
 
 
 def test_constructor():
     global ai
-    ai = AI(START_LINE, WIDTH, HEIGHT, GRID_SIZE)
+    ai = AI(START_LINE, WIDTH, HEIGHT, GRID_SIZE, 6)
     assert (
         ai.start_line == 100 and
         ai.grid_size == 100 and

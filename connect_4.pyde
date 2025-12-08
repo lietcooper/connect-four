@@ -3,6 +3,7 @@ WIDTH = 700
 HEIGHT = 700
 GRID_SIZE = 100
 START_LINE = GRID_SIZE  # the height of click area
+MAX_DEPTH = 6
 
 # def input(message=''):
 
@@ -16,7 +17,7 @@ def setup():
         print('[empty string]')
     else:
         print(answer)  # Canceled dialog will print None
-    gc = GameController(START_LINE, WIDTH, HEIGHT, GRID_SIZE, answer)
+    gc = GameController(START_LINE, WIDTH, HEIGHT, GRID_SIZE, answer, MAX_DEPTH)
 
 
 def input(message=''):

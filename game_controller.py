@@ -7,13 +7,13 @@ class GameController:
     """To control the flow of the game and action of the player and ai"""
     WHITE = (255, 255, 255)
 
-    def __init__(self, start_line, width, height, grid_size, name):
+    def __init__(self, start_line, width, height, grid_size, name, max_depth=6):
         self.start_line = start_line
         self.width = width
         self.height = height
         self.grid = Grid(start_line, width, height, grid_size)
         self.grid.gc = self
-        self.ai = AI(start_line, width, height, grid_size)
+        self.ai = AI(start_line, width, height, grid_size, max_depth)
         self.ai.gc = self
         self.disk_falling = False
         self.is_player_turn = True
